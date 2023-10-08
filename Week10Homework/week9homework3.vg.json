@@ -1,0 +1,49 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Member choices on Target Region",
+    "width": 800,
+    "height": 400,
+    "data": {
+      "url": "https://raw.githubusercontent.com/pduo0004/FIT3179/main/country_migration_public.csv",
+      "format": {"type": "csv"}
+    },
+    "transform": [
+      {
+        "aggregate": [{"op": "count", "as": "NumPeople"}],
+        "groupby": ["target_country_wb_region"]
+      }
+    ],
+
+    "encoding": {
+      "x": {"field": "target_country_wb_region", "type": "nominal", "title": "Region"},
+      "y": {"field": "NumPeople", "type": "quantitative", "title": "Number of Members"},
+      "color": {"value" : "red"},
+      "tooltip": [
+        {"field": "target_country_wb_region", "type": "nominal", "title": "Region"},
+        {"field": "NumPeople", "type": "quantitative", "title": "Number of Members"}
+      ]
+    },
+    "layer" : [
+      {
+        "mark" : "line"
+  
+      },
+      {
+        "mark" : {
+          "type" : "text",
+          "align" : "right",
+          "baseline": "middle",
+          "dx": -12,
+          "fontSize": 11.5,
+          "fontStyle": "italic"
+        },
+        "encoding" : {
+          "text": {"field": "NumPeople", "type": "quantitative"},
+          "color": {"value": "black"}
+          
+          }
+      }
+    ]
+}
+  
+  
